@@ -7,10 +7,10 @@ import minispring.stereotype.Repository;
 
 @Repository
 public class OrderRepository {
-    private final List<Product> orders = new ArrayList<>();
+    private final List<String> orders = new ArrayList<>();
 
     public void save(Product product) {
-        this.orders.add(product);
+        this.orders.add(product.name());
     }
 
     public int count() {

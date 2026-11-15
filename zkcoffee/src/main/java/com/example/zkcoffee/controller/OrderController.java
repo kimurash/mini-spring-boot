@@ -10,18 +10,20 @@ import minispring.web.bind.annotation.RestController;
 
 @RestController
 public class OrderController {
+    private static final long COFFEE_ID = 1L;
+
     @Autowired
     private OrderService orderService;
 
     @GetMapping("/stock")
     public GetStockResponse getStock() {
-        Product product = this.orderService.getProduct();
+        Product product = this.orderService.getProduct(COFFEE_ID);
         return new GetStockResponse(product.name(), product.stock());
     }
 
     @PostMapping("/orders")
     public String order() {
-        this.orderService.order();
+        this.orderService.order(COFFEE_ID);
         return "Ordered";
     }
 }

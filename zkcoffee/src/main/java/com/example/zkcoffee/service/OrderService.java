@@ -16,12 +16,12 @@ public class OrderService {
     private OrderRepository orderRepository;
 
     @Transactional
-    public void order() {
-        this.productRepository.decrease();
-        this.orderRepository.save(this.productRepository.find());
+    public void order(long productId) {
+        this.productRepository.decrease(productId);
+        this.orderRepository.save(this.productRepository.findById(productId));
     }
 
-    public Product getProduct() {
-        return this.productRepository.find();
+    public Product getProduct(long productId) {
+        return this.productRepository.findById(productId);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.zkcoffee.controller;
 
+import com.example.zkcoffee.entity.Product;
 import com.example.zkcoffee.response.GetStockResponse;
 import com.example.zkcoffee.service.OrderService;
 import minispring.beans.factory.annotation.Autowired;
@@ -14,12 +15,13 @@ public class OrderController {
 
     @GetMapping("/stock")
     public GetStockResponse getStock() {
-        return new GetStockResponse("coffee", this.orderService.getStock("coffee"));
+        Product product = this.orderService.getProduct();
+        return new GetStockResponse(product.name(), product.stock());
     }
 
     @PostMapping("/orders")
     public String order() {
-        this.orderService.order("coffee");
+        this.orderService.order();
         return "Ordered";
     }
 }
